@@ -1,23 +1,30 @@
 import React from "react";
 
 import "./style.css";
+import { Router, RouterProvider } from "@tanstack/react-router";
+import { routeTree } from "./routeTree.gen";
+
+const router = new Router({
+  routeTree,
+  defaultPreload: "intent",
+});
+
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router;
+  }
+}
 
 export default function App({ assets }) {
-	const [count, setCount] = React.useState(0);
-	return (
-		<html lang="en">
-			<head>
-				<link rel="icon" href="/favicon.ico" />
-				{assets}
-			</head>
-			<body>
-				<section>
-					<h1>Hello AgentConf with ya asdo!!!</h1>
-					<button onClick={() => setCount(count + 1)}>
-						Click me: {count}!
-					</button>
-				</section>
-			</body>
-		</html>
-	);
+  return (
+    <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        {assets}
+      </head>
+      <body>
+        <RouterProvider router={router} />
+      </body>
+    </html>
+  );
 }
