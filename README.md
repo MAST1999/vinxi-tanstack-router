@@ -3,4 +3,5 @@
 ## Setup
 
 Install packages with `pnpm install`.
+
 Run with `pnpm dev`.
